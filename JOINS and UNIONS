@@ -1,0 +1,103 @@
+-- INNER JOIN
+-- Retrieves only matching rows between two tables (common in both).
+SELECT 
+    e.Name AS EmployeeName, 
+    d.DepartmentName
+FROM 
+    Employees e
+INNER JOIN 
+    Departments d 
+ON 
+    e.DepartmentID = d.DepartmentID;
+-- Result: Employees with matching departments.
+
+-- LEFT JOIN (or LEFT OUTER JOIN)
+-- Retrieves all rows from the left table, with matching rows from the right table if available.
+SELECT 
+    e.Name AS EmployeeName, 
+    d.DepartmentName
+FROM 
+    Employees e
+LEFT JOIN 
+    Departments d 
+ON 
+    e.DepartmentID = d.DepartmentID;
+-- Result: All employees, even if they don't belong to a department.
+
+-- RIGHT JOIN (or RIGHT OUTER JOIN)
+-- Retrieves all rows from the right table, with matching rows from the left table if available.
+SELECT 
+    e.Name AS EmployeeName, 
+    d.DepartmentName
+FROM 
+    Employees e
+RIGHT JOIN 
+    Departments d 
+ON 
+    e.DepartmentID = d.DepartmentID;
+-- Result: All departments, even if they don't have employees assigned.
+
+-- FULL JOIN (or FULL OUTER JOIN)
+-- Retrieves all rows when there is a match in either table.
+SELECT 
+    e.Name AS EmployeeName, 
+    d.DepartmentName
+FROM 
+    Employees e
+FULL JOIN 
+    Departments d 
+ON 
+    e.DepartmentID = d.DepartmentID;
+-- Result: All employees and departments, matching where possible.
+
+-- UNION
+-- Combines the results of two SELECT statements, removing duplicates.
+SELECT 
+    Name AS EntityName 
+FROM 
+    Employees
+UNION
+SELECT 
+    DepartmentName AS EntityName 
+FROM 
+    Departments;
+-- Result: A combined list of unique employee names and department names.
+
+-- UNION ALL
+-- Combines the results of two SELECT statements without removing duplicates.
+SELECT 
+    Name AS EntityName 
+FROM 
+    Employees
+UNION ALL
+SELECT 
+    DepartmentName AS EntityName 
+FROM 
+    Departments;
+-- Result: A combined list of employee names and department names, including duplicates.
+
+-- CROSS JOIN
+-- Produces a Cartesian product of the two tables.
+SELECT 
+    e.Name AS EmployeeName, 
+    d.DepartmentName
+FROM 
+    Employees e
+CROSS JOIN 
+    Departments d;
+-- Result: Every possible combination of employees and departments.
+
+-- Self JOIN
+-- A join of a table with itself, often used to find hierarchical relationships.
+SELECT 
+    e1.Name AS EmployeeName, 
+    e2.Name AS ManagerName
+FROM 
+    Employees e1
+LEFT JOIN 
+    Employees e2
+ON 
+    e1.DepartmentID = e2.EmployeeID;
+-- Result: Employees and their managers (assuming managers are listed as employees too).
+
+-- This script demonstrates key SQL concepts and can be expanded with more advanced examples.
