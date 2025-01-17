@@ -1,0 +1,33 @@
+-- This query finds the average salary of all employees in the 'Sales' department.
+-- This part calculates the average salary of all employees in the 'Sales' department. The result of this subquery is a single value (the average salary).
+
+SELECT AVG(salary) 
+FROM employees
+WHERE department = 'Sales';
+
+-- This subquery stores the average salary of 'Sales' employees in a variable.
+-- This subquery is used within the SELECT clause of the main query. It calculates the average salary of 'Sales' employees again.
+-- The result of this subquery (the average salary) is then assigned to the alias avg_sales_salary for each row in the main query.
+-- This effectively adds a new column to the result set containing the average salary of 'Sales' employees for each employee.
+
+SELECT 
+    employee_id, 
+    salary, 
+    department,
+    (SELECT AVG(salary) 
+     FROM employees
+     WHERE department = 'Sales') AS avg_sales_salary
+FROM employees;
+
+-- This query finds employees who earn more than the average salary of 'Sales' employees.
+-- This subquery is used within the WHERE clause of the main query. It calculates the average salary of 'Sales' employees.
+-- The main query then selects only those employees whose salary is greater than the calculated average salary of 'Sales' employees.
+
+SELECT 
+    employee_id, 
+    salary, 
+    department
+FROM employees
+WHERE salary > (SELECT AVG(salary) 
+                FROM employees
+                WHERE department = 'Sales');
